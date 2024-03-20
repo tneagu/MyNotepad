@@ -1,4 +1,4 @@
-package com.tneagu.noteslist.ui
+package com.tneagu.noteslist.presentation.ui
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

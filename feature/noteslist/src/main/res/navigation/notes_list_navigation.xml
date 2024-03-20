@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.tneagu.noteslist.NotesFragment"
+        android:name="com.tneagu.noteslist.presentation.NotesFragment"
         android:label="NotesFragment" >
         <action
             android:id="@+id/viewNoteDetails"
