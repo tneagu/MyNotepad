@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
@@ -15,7 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.tneagu.noteslist.R
-import com.tneagu.noteslist.presentation.ui.Greeting
+import com.tneagu.noteslist.presentation.model.NotesState
+import com.tneagu.noteslist.presentation.ui.NotesList
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,14 +33,19 @@ class NotesFragment : Fragment() {
                 Column(
                     modifier = Modifier.padding(16.dp)
                 ) {
-                    Greeting(name = "Hello!")
+                    when (val notesState = viewModel.notesState.collectAsState().value) {
+                        is NotesState.Loaded -> {
+                            NotesList(
+                                notes = notesState.notes,
+                                onNoteClick = {
 
-                    Button(
-                        onClick = {
-                            findNavController().navigate(R.id.viewNoteDetails)
+                                    findNavController().navigate(R.id.viewNoteDetails)
+                                },
+                            )
                         }
-                    ) {
-                        Text(viewModel.viewModelText)
+
+                        NotesState.NotInitialized -> {}
+                        NotesState.Loading -> {}
                     }
                 }
 

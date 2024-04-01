@@ -1,7 +1,7 @@
 plugins {
+    kotlin("kapt")
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
     id("com.google.dagger.hilt.android")
 }
 
@@ -43,6 +43,7 @@ android {
 
 dependencies {
     implementation(project(":feature:notedetails"))
+    implementation(project(":data"))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")

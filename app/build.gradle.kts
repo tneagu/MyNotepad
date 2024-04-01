@@ -1,8 +1,9 @@
 plugins {
+    kotlin("kapt")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -58,6 +59,7 @@ kapt {
 dependencies {
     implementation(project(":feature:noteslist"))
     implementation(project(":feature:notedetails"))
+    implementation(project(":data"))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
@@ -67,6 +69,8 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+
+    implementation("com.google.firebase:firebase-firestore:24.10.3")
 
     val constraintLayout = "2.1.4"
     implementation ("androidx.constraintlayout:constraintlayout:$constraintLayout")

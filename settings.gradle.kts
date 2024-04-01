@@ -17,3 +17,4 @@ rootProject.name = "MyNotepad"
 include(":app")
 include(":feature:noteslist")
 include(":feature:notedetails")
+include(":data")

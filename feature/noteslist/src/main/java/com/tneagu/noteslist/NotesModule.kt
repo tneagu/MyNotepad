@@ -1,5 +1,6 @@
 package com.tneagu.noteslist
 
+import com.tneagu.data.repository.notes.NotesRepo
 import com.tneagu.noteslist.domain.GetNotesUseCase
 import com.tneagu.noteslist.domain.GetNotesUseCaseImpl
 import dagger.Module
@@ -12,5 +13,5 @@ import dagger.hilt.android.components.ViewModelComponent
 class NotesModule {
 
     @Provides
-    fun provideNotesUseCase(): GetNotesUseCase = GetNotesUseCaseImpl()
+    fun provideNotesUseCase(notesRepo: NotesRepo): GetNotesUseCase = GetNotesUseCaseImpl(notesRepo)
 }
