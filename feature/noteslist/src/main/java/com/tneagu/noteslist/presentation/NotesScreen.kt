@@ -24,7 +24,7 @@ fun NotesScreen(
                     notes = notesState.notes,
                     onNoteClick = {
 
-                        onNoteClick(it.body)
+                        viewModel.onNoteClick(it.body)
                     },
                 )
             }
