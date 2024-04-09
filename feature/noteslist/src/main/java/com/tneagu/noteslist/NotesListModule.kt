@@ -10,7 +10,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @InstallIn(ViewModelComponent::class)
 @Module
-class NotesModule {
+object NotesListModule {
 
     @Provides
     fun provideNotesUseCase(notesRepo: NotesRepo): GetNotesUseCase = GetNotesUseCaseImpl(notesRepo)

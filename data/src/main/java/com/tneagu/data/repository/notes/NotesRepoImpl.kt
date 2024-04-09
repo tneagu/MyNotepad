@@ -13,6 +13,11 @@ class NotesRepoImpl @Inject constructor(
         return fireStore.collection(collectionName).dataObjects<Note>().first()
     }
 
+    override suspend fun getNote(noteId: String): Note {
+        return fireStore.collection(collectionName).whereEqualTo("noteId", noteId)
+            .dataObjects<Note>().first().first()
+    }
+
     override suspend fun save(note: Note) {
         val collection = fireStore.collection(collectionName)
         collection.add(note)

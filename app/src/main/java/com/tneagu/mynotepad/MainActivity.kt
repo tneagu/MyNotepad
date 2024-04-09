@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -14,9 +15,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.tneagu.appnavigation.AppNavigator
 import com.tneagu.notedetails.NoteDetailsNavigation
-import com.tneagu.notedetails.ui.NoteDetailsScreen
+import com.tneagu.notedetails.presentation.NoteDetailsScreen
+import com.tneagu.notedetails.presentation.NoteDetailsViewModel
 import com.tneagu.noteslist.NotesListNavigation
-import com.tneagu.noteslist.presentation.NotesScreen
+import com.tneagu.noteslist.presentation.NotesListScreen
 import com.tneagu.noteslist.presentation.NotesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -60,8 +62,13 @@ fun AppNavHost(
 
         composable(NotesListNavigation.notesListRoute) {
             val viewModel = hiltViewModel<NotesViewModel>()
-            NotesScreen(viewModel = viewModel, onNoteClick = {
-            })
+            val screenState = viewModel.notesState.collectAsState().value
+            NotesListScreen(
+                state = screenState,
+                onNoteClick = {
+                    viewModel.onNoteClick(it.id)
+                }
+            )
         }
 
 
@@ -71,7 +78,15 @@ fun AppNavHost(
                 type = NavType.StringType
             }),
         ) {
-            NoteDetailsScreen()
+            val noteId = it.arguments?.getString(NoteDetailsNavigation.noteIdArg) ?: ""
+
+            val viewModel =
+                hiltViewModel<NoteDetailsViewModel, NoteDetailsViewModel.NoteDetailsViewModelFactory>
+                { factory ->
+                    factory.create(noteId)
+                }
+            val screenState = viewModel.noteDetailsState.collectAsState().value
+            NoteDetailsScreen(state = screenState)
         }
     }
 }
