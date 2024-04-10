@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class NotesViewModel @Inject constructor(
+class NotesListViewModel @Inject constructor(
     val getNotesUseCaseImpl: GetNotesUseCase,
     val appNavigator: AppNavigator
 ) : ViewModel() {

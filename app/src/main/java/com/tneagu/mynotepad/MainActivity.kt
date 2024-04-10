@@ -14,12 +14,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.tneagu.appnavigation.AppNavigator
+import com.tneagu.auth.AuthNavigation
+import com.tneagu.auth.login.presentation.LoginScreen
+import com.tneagu.auth.login.presentation.LoginViewModel
 import com.tneagu.notedetails.NoteDetailsNavigation
 import com.tneagu.notedetails.presentation.NoteDetailsScreen
 import com.tneagu.notedetails.presentation.NoteDetailsViewModel
 import com.tneagu.noteslist.NotesListNavigation
 import com.tneagu.noteslist.presentation.NotesListScreen
-import com.tneagu.noteslist.presentation.NotesViewModel
+import com.tneagu.noteslist.presentation.NotesListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -57,11 +60,18 @@ fun AppNavHost(
 
     NavHost(
         navController = navController,
-        startDestination = NotesListNavigation.notesListRoute,
+        startDestination = AuthNavigation.loginRoute,
     ) {
+        composable(AuthNavigation.loginRoute) {
+            val viewModel = hiltViewModel<LoginViewModel>()
+            LoginScreen(
+                onLoginClick = viewModel::login
+            )
+        }
+
 
         composable(NotesListNavigation.notesListRoute) {
-            val viewModel = hiltViewModel<NotesViewModel>()
+            val viewModel = hiltViewModel<NotesListViewModel>()
             val screenState = viewModel.notesState.collectAsState().value
             NotesListScreen(
                 state = screenState,
