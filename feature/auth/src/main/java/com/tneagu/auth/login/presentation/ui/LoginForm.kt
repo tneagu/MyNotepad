@@ -23,6 +23,7 @@ import com.tneagu.auth.R
 
 @Composable
 fun LoginForm(
+    isLoading: Boolean = false,
     onLoginClick: (String, String) -> (Unit),
 ) {
     Column(
@@ -38,7 +39,7 @@ fun LoginForm(
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
-            label = { Text(stringResource(R.string.username)) }
+            label = { Text(stringResource(R.string.email)) }
         )
 
         OutlinedTextField(

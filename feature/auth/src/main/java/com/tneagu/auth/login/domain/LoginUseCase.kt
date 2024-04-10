@@ -1,4 +1,6 @@
 package com.tneagu.auth.login.domain
 
-class LoginUseCase {
+interface LoginUseCase {
+
+    suspend fun login(email: String, password: String): Boolean
 }

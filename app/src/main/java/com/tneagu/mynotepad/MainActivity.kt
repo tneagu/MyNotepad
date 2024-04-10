@@ -64,7 +64,9 @@ fun AppNavHost(
     ) {
         composable(AuthNavigation.loginRoute) {
             val viewModel = hiltViewModel<LoginViewModel>()
+            val screenState = viewModel.state.collectAsState().value
             LoginScreen(
+                state = screenState,
                 onLoginClick = viewModel::login
             )
         }

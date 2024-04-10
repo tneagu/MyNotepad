@@ -74,7 +74,10 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
 
-    implementation("com.google.firebase:firebase-firestore:24.11.0")
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-auth")
 
     val constraintLayout = "2.1.4"
     implementation("androidx.constraintlayout:constraintlayout:$constraintLayout")
