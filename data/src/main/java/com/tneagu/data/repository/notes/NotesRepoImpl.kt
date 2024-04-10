@@ -14,7 +14,7 @@ class NotesRepoImpl @Inject constructor(
     }
 
     override suspend fun getNote(noteId: String): Note {
-        return fireStore.collection(collectionName).whereEqualTo("noteId", noteId)
+        return fireStore.collection(collectionName).whereEqualTo("id", noteId)
             .dataObjects<Note>().first().first()
     }
 
