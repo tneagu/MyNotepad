@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NotesListViewModel @Inject constructor(
-    val getNotesUseCaseImpl: GetNotesUseCase,
-    val appNavigator: AppNavigator
+    private val getNotesUseCase: GetNotesUseCase,
+    private val appNavigator: AppNavigator
 ) : ViewModel() {
 
     private val _notesState = MutableStateFlow<NotesState>(NotesState.NotInitialized)
@@ -23,7 +23,7 @@ class NotesListViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val notes = getNotesUseCaseImpl.getNotes()
+            val notes = getNotesUseCase()
             _notesState.value = NotesState.Loaded(
                 notes = notes
             )

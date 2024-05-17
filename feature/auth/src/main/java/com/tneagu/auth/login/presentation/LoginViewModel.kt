@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val appNavigator: AppNavigator,
-    private val loginUseCaseImpl: LoginUseCase
+    private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
     val _state = MutableStateFlow<LoginState>(LoginState.NotAuthenticated)
@@ -24,7 +24,7 @@ class LoginViewModel @Inject constructor(
     fun login(email: String, password: String) {
         _state.value = LoginState.Loading
         viewModelScope.launch {
-            val isSuccess = loginUseCaseImpl.login(email, password)
+            val isSuccess = loginUseCase(email, password)
             if (isSuccess) {
                 appNavigator.navigate(NotesListNavigation.openNoteList())
             } else {

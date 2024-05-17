@@ -24,7 +24,7 @@ class NoteDetailsViewModel @AssistedInject constructor(
 
     init {
         viewModelScope.launch {
-            val note = noteUseCase.getNote(noteId)
+            val note = noteUseCase(noteId)
             _noteDetailsState.value = NoteDetailsState.Loaded(
                 note = note
             )
