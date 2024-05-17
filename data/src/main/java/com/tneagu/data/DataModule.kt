@@ -29,6 +29,6 @@ class DataModule {
         AuthRepoImpl(firebaseAuth = firebaseAuth)
 
     @Provides
-    fun provideNotesRepo(fireStore: FirebaseFirestore): NotesRepo =
-        NotesRepoImpl(fireStore = fireStore)
+    fun provideNotesRepo(fireStore: FirebaseFirestore, firebaseAuth: FirebaseAuth): NotesRepo =
+        NotesRepoImpl(fireStore = fireStore, auth = firebaseAuth)
 }
