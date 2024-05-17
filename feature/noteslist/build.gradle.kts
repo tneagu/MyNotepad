@@ -43,6 +43,7 @@ android {
 
 dependencies {
     implementation(project(":feature:notedetails"))
+    implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":appnavigation"))
 

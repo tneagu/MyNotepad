@@ -5,7 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.tneagu.data.repository.notes.model.Note
+import com.tneagu.domain.entities.Note
 
 @Composable
 fun NotesList(

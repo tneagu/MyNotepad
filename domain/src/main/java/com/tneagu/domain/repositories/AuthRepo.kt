@@ -1,4 +1,4 @@
-package com.tneagu.data.repository.auth
+package com.tneagu.domain.repositories
 
 interface AuthRepo {
 

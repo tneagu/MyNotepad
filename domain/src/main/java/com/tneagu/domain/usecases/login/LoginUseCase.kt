@@ -1,4 +1,4 @@
-package com.tneagu.auth.login.domain
+package com.tneagu.domain.usecases.login
 
 interface LoginUseCase {
 

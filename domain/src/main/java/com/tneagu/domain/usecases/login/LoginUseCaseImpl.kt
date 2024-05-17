@@ -1,6 +1,6 @@
-package com.tneagu.auth.login.domain
+package com.tneagu.domain.usecases.login
 
-import com.tneagu.data.repository.auth.AuthRepo
+import com.tneagu.domain.repositories.AuthRepo
 import javax.inject.Inject
 
 class LoginUseCaseImpl @Inject constructor(

@@ -1,6 +1,6 @@
 package com.tneagu.noteslist.presentation.model
 
-import com.tneagu.data.repository.notes.model.Note
+import com.tneagu.domain.entities.Note
 
 sealed class NotesState {
 

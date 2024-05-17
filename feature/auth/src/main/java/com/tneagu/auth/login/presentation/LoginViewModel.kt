@@ -3,13 +3,10 @@ package com.tneagu.auth.login.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tneagu.appnavigation.AppNavigator
-import com.tneagu.auth.R
-import com.tneagu.auth.login.domain.LoginUseCase
-import com.tneagu.auth.login.domain.LoginUseCaseImpl
+import com.tneagu.domain.usecases.login.LoginUseCase
 import com.tneagu.auth.login.presentation.model.LoginState
 import com.tneagu.noteslist.NotesListNavigation
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

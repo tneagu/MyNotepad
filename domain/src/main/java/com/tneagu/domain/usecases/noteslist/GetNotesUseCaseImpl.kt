@@ -1,7 +1,7 @@
-package com.tneagu.noteslist.domain
+package com.tneagu.domain.usecases.noteslist
 
-import com.tneagu.data.repository.notes.NotesRepo
-import com.tneagu.data.repository.notes.model.Note
+import com.tneagu.domain.repositories.NotesRepo
+import com.tneagu.domain.entities.Note
 import javax.inject.Inject
 
 class GetNotesUseCaseImpl @Inject constructor(

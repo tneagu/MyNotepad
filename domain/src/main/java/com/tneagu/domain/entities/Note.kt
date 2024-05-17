@@ -1,4 +1,4 @@
-package com.tneagu.data.repository.notes.model
+package com.tneagu.domain.entities
 
 data class Note(
     val id: String = "",
