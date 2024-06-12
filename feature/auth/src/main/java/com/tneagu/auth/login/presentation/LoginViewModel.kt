@@ -18,8 +18,13 @@ class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
-    val _state = MutableStateFlow<LoginState>(LoginState.NotAuthenticated)
+    val _state = MutableStateFlow<LoginState>(LoginState.Uninitialized)
     val state = _state.asStateFlow()
+
+    init {
+        //check login status
+        appNavigator.navigate(NotesListNavigation.openNoteList())
+    }
 
     fun login(email: String, password: String) {
         _state.value = LoginState.Loading

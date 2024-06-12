@@ -17,6 +17,7 @@ import com.tneagu.appnavigation.AppNavigator
 import com.tneagu.auth.AuthNavigation
 import com.tneagu.auth.login.presentation.LoginScreen
 import com.tneagu.auth.login.presentation.LoginViewModel
+import com.tneagu.auth.login.presentation.model.LoginState
 import com.tneagu.notedetails.NoteDetailsNavigation
 import com.tneagu.notedetails.presentation.NoteDetailsScreen
 import com.tneagu.notedetails.presentation.NoteDetailsViewModel
@@ -64,11 +65,24 @@ fun AppNavHost(
     ) {
         composable(AuthNavigation.loginRoute) {
             val viewModel = hiltViewModel<LoginViewModel>()
-            val screenState = viewModel.state.collectAsState().value
-            LoginScreen(
-                state = screenState,
-                onLoginClick = viewModel::login
-            )
+            when (val screenState = viewModel.state.collectAsState().value) {
+                LoginState.Error,
+                LoginState.Loading,
+                LoginState.NotAuthenticated -> {
+                    LoginScreen(
+                        state = screenState,
+                        onLoginClick = viewModel::login
+                    )
+                }
+
+                LoginState.LoggedIn -> {
+                    //navigation is done in view model
+                }
+                LoginState.Uninitialized -> {
+                    //na
+                }
+            }
+
         }
 
 
