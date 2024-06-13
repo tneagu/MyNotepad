@@ -42,8 +42,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":data"))
-    implementation(project(":domain"))
+    implementation(project(":domain-common"))
     implementation(project(":appnavigation"))
     implementation(project(":feature:noteslist"))
 

@@ -43,8 +43,7 @@ android {
 
 dependencies {
     implementation(project(":feature:notedetails"))
-    implementation(project(":domain"))
-    implementation(project(":data"))
+    implementation(project(":domain-common"))
     implementation(project(":appnavigation"))
 
     implementation("androidx.core:core-ktx:1.12.0")

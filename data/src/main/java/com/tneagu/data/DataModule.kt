@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
-import com.tneagu.domain.repositories.AuthRepo
+import com.tneagu.auth.login.domain.repositories.AuthRepo
 import com.tneagu.data.repository.auth.AuthRepoImpl
 import com.tneagu.domain.repositories.NotesRepo
 import com.tneagu.data.repository.notes.NotesRepoImpl

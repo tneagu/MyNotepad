@@ -2,7 +2,7 @@ package com.tneagu.notedetails.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tneagu.domain.usecases.notedetails.GetNoteDetailsUseCase
+import com.tneagu.notedetails.domain.usecases.GetNoteDetailsUseCase
 import com.tneagu.notedetails.presentation.model.NoteDetailsState
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory

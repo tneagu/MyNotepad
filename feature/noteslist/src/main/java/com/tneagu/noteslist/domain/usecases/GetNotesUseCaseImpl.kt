@@ -1,4 +1,4 @@
-package com.tneagu.domain.usecases.noteslist
+package com.tneagu.noteslist.domain.usecases
 
 import com.tneagu.domain.entities.Note
 import com.tneagu.domain.repositories.NotesRepo

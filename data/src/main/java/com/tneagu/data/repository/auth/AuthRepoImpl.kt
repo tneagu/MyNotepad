@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class AuthRepoImpl @Inject constructor(
     val firebaseAuth: FirebaseAuth
-) : com.tneagu.domain.repositories.AuthRepo {
+) : com.tneagu.auth.login.domain.repositories.AuthRepo {
     override suspend fun login(email: String, password: String): String {
         firebaseAuth.signInWithEmailAndPassword(email, password).await()
 

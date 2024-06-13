@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tneagu.appnavigation.AppNavigator
 import com.tneagu.notedetails.NoteDetailsNavigation
-import com.tneagu.domain.usecases.noteslist.GetNotesUseCase
+import com.tneagu.noteslist.domain.usecases.GetNotesUseCase
 import com.tneagu.noteslist.presentation.model.NotesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

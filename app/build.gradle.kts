@@ -60,7 +60,7 @@ dependencies {
     implementation(project(":feature:noteslist"))
     implementation(project(":feature:notedetails"))
     implementation(project(":data"))
-    implementation(project(":domain"))
+    implementation(project(":domain-common"))
     implementation(project(":appnavigation"))
     implementation(project(":feature:auth"))
 
