@@ -3,6 +3,7 @@ package com.tneagu.auth.login.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tneagu.appnavigation.AppNavigator
+import com.tneagu.auth.login.domain.usecases.CurrentUserUseCase
 import com.tneagu.auth.login.domain.usecases.LoginUseCase
 import com.tneagu.auth.login.presentation.model.LoginState
 import com.tneagu.noteslist.NotesListNavigation
@@ -15,15 +16,22 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val appNavigator: AppNavigator,
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    private val currentUserUseCase: CurrentUserUseCase,
 ) : ViewModel() {
 
     val _state = MutableStateFlow<LoginState>(LoginState.Uninitialized)
     val state = _state.asStateFlow()
 
     init {
-        //check login status
-        appNavigator.navigate(NotesListNavigation.openNoteList())
+        viewModelScope.launch {
+            val currentUser = currentUserUseCase.invoke()
+            if (currentUser == null) {
+                _state.value = LoginState.NotAuthenticated
+            } else {
+                appNavigator.navigate(NotesListNavigation.openNoteList())
+            }
+        }
     }
 
     fun login(email: String, password: String) {
