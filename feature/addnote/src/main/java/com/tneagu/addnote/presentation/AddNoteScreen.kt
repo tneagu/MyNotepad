@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.tneagu.addnote.R
 import com.tneagu.addnote.presentation.model.AddNoteState
+import com.tneagu.addnote.presentation.ui.NoteEditor
 import com.tneagu.domain.entities.Note
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -45,7 +46,7 @@ fun AddNoteScreen(
         Column(
             modifier = Modifier.padding(paddingValues)
         ) {
-            Text("ADD NOTE SCREEN")
+            NoteEditor(onSave = { _, _ -> })
         }
     }
 }
