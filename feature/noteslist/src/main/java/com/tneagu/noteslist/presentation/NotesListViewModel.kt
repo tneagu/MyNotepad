@@ -2,6 +2,7 @@ package com.tneagu.noteslist.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tneagu.addnote.AddNoteNavigation
 import com.tneagu.appnavigation.AppNavigator
 import com.tneagu.notedetails.NoteDetailsNavigation
 import com.tneagu.noteslist.domain.usecases.GetNotesUseCase
@@ -33,5 +34,9 @@ class NotesListViewModel @Inject constructor(
 
     fun onNoteClick(noteId: String) {
         appNavigator.navigate(NoteDetailsNavigation.openNoteDetails(noteId))
+    }
+
+    fun onAddNoteClicked() {
+        appNavigator.navigate(AddNoteNavigation.openAddNote())
     }
 }

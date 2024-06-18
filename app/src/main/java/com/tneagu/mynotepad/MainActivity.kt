@@ -13,6 +13,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.tneagu.addnote.AddNoteNavigation
+import com.tneagu.addnote.presentation.AddNoteScreen
+import com.tneagu.addnote.presentation.AddNoteViewModel
 import com.tneagu.appnavigation.AppNavigator
 import com.tneagu.auth.AuthNavigation
 import com.tneagu.auth.login.presentation.LoginScreen
@@ -78,6 +81,7 @@ fun AppNavHost(
                 LoginState.LoggedIn -> {
                     //navigation is done in view model
                 }
+
                 LoginState.Uninitialized -> {
                     //na
                 }
@@ -93,7 +97,10 @@ fun AppNavHost(
                 state = screenState,
                 onNoteClick = {
                     viewModel.onNoteClick(it.id)
-                }
+                },
+                onAddNoteClick = {
+                    viewModel.onAddNoteClicked()
+                },
             )
         }
 
@@ -113,6 +120,15 @@ fun AppNavHost(
                 }
             val screenState = viewModel.noteDetailsState.collectAsState().value
             NoteDetailsScreen(state = screenState)
+        }
+
+        composable(AddNoteNavigation.addNoteRoute) {
+            val viewModel = hiltViewModel<AddNoteViewModel>()
+            val screenState = viewModel.addNoteState.collectAsState().value
+            AddNoteScreen(
+                state = screenState,
+                onAddNote = {},
+            )
         }
     }
 }

@@ -29,7 +29,8 @@ import com.tneagu.noteslist.presentation.ui.NotesList
 @Composable
 fun NotesListScreen(
     state: NotesState,
-    onNoteClick: (Note) -> Unit
+    onNoteClick: (Note) -> Unit,
+    onAddNoteClick: () -> Unit,
 ) {
 
     Scaffold(
@@ -50,7 +51,7 @@ fun NotesListScreen(
         },
         floatingActionButton = {
             SmallFloatingActionButton(
-                onClick = { },
+                onClick = onAddNoteClick,
                 containerColor = MaterialTheme.colorScheme.secondaryContainer,
                 contentColor = MaterialTheme.colorScheme.secondary
             ) {
