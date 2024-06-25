@@ -22,14 +22,13 @@ class NotesListViewModel @Inject constructor(
     private val _notesState = MutableStateFlow<NotesState>(NotesState.NotInitialized)
     val notesState = _notesState.asStateFlow()
 
-    init {
+    fun loadData(){
         viewModelScope.launch {
             val notes = getNotesUseCase()
             _notesState.value = NotesState.Loaded(
                 notes = notes
             )
         }
-
     }
 
     fun onNoteClick(noteId: String) {

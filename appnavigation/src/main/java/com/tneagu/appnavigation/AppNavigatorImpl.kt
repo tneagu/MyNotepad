@@ -12,4 +12,8 @@ class AppNavigatorImpl : AppNavigator {
     override fun navigate(navAction: NavigationAction) {
         _navActions.value = navAction
     }
+
+    override fun back() {
+        navigate(BackNavigation.back())
+    }
 }

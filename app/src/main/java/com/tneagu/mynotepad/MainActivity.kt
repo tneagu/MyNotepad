@@ -4,7 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
@@ -17,6 +20,7 @@ import com.tneagu.addnote.AddNoteNavigation
 import com.tneagu.addnote.presentation.AddNoteScreen
 import com.tneagu.addnote.presentation.AddNoteViewModel
 import com.tneagu.appnavigation.AppNavigator
+import com.tneagu.appnavigation.BACK_NAVIGATION
 import com.tneagu.auth.AuthNavigation
 import com.tneagu.auth.login.presentation.LoginScreen
 import com.tneagu.auth.login.presentation.LoginViewModel
@@ -28,6 +32,7 @@ import com.tneagu.noteslist.NotesListNavigation
 import com.tneagu.noteslist.presentation.NotesListScreen
 import com.tneagu.noteslist.presentation.NotesListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -55,10 +60,17 @@ fun AppNavHost(
 
     appNavigator.navActions.collectAsStateWithLifecycle().value.also { navigationAction ->
         navigationAction?.let {
-            it.parcelableArguments.forEach { arg ->
-                navController.currentBackStackEntry?.arguments?.putParcelable(arg.key, arg.value)
+            if (it.destination == BACK_NAVIGATION) {
+                navController.popBackStack()
+            } else {
+                it.parcelableArguments.forEach { arg ->
+                    navController.currentBackStackEntry?.arguments?.putParcelable(
+                        arg.key,
+                        arg.value
+                    )
+                }
+                navController.navigate(it.destination, it.navOptions)
             }
-            navController.navigate(it.destination, it.navOptions)
         }
     }
 
@@ -102,6 +114,18 @@ fun AppNavHost(
                     viewModel.onAddNoteClicked()
                 },
             )
+
+            // load data each time page loads
+            val coroutineScope = rememberCoroutineScope()
+            LaunchedEffect(navController) {
+                navController.addOnDestinationChangedListener { _, _, _ ->
+                    if (navController.currentBackStackEntry?.destination?.route == NotesListNavigation.notesListRoute) {
+                        coroutineScope.launch {
+                            viewModel.loadData()
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -127,7 +151,9 @@ fun AppNavHost(
             val screenState = viewModel.addNoteState.collectAsState().value
             AddNoteScreen(
                 state = screenState,
-                onAddNote = {},
+                onAddNote = { title, content ->
+                    viewModel.saveNote(title, content)
+                },
             )
         }
     }

@@ -6,6 +6,7 @@ import com.google.firebase.firestore.dataObjects
 import com.tneagu.domain.entities.Note
 import com.tneagu.domain.repositories.NotesRepo
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class NotesRepoImpl @Inject constructor(
@@ -26,8 +27,21 @@ class NotesRepoImpl @Inject constructor(
     }
 
     override suspend fun save(note: Note) {
-        val collection = fireStore.collection(collectionName)
-        collection.add(note)
+        try {
+            if(auth.currentUser == null){
+                throw IllegalStateException("User must be authenticated")
+            }
+            val noteWithUserId = note.copy(userId = auth.currentUser!!.uid)
+            val documentReference = fireStore.collection(collectionName)
+                .add(noteWithUserId)
+                .await()
+
+            val noteWithId = noteWithUserId.copy(id = documentReference.id)
+            documentReference.set(noteWithId).await()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     companion object {

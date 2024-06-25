@@ -17,13 +17,12 @@ import androidx.compose.ui.res.stringResource
 import com.tneagu.addnote.R
 import com.tneagu.addnote.presentation.model.AddNoteState
 import com.tneagu.addnote.presentation.ui.NoteEditor
-import com.tneagu.domain.entities.Note
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddNoteScreen(
     state: AddNoteState,
-    onAddNote: (Note) -> Unit
+    onAddNote: (title: String, content: String) -> Unit
 ) {
 
     Scaffold(
@@ -46,7 +45,7 @@ fun AddNoteScreen(
         Column(
             modifier = Modifier.padding(paddingValues)
         ) {
-            NoteEditor(onSave = { _, _ -> })
+            NoteEditor(onSave = onAddNote)
         }
     }
 }
